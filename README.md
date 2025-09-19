@@ -1,69 +1,69 @@
-# React + TypeScript + Vite
+# 리엑트 라우터 + typescript로 영화 웹 만들기
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 9/19
 
-Currently, two official plugins are available:
+- 리액트 라우터 install 하는 방법
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 리액트 라우터의 문법
 
-## Expanding the ESLint configuration
+- 미니 프로젝트의 폴더/파일 분활
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# 9/19 메모장
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## API
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Movie API : "https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year"
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. detail movie api : `https://yts.mx/api/v2/movie_details.json?movie_id=${id}&with_cast=true`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## (UI) main pages
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. 왼쪽 로고 + 이름, 오른쪽 검색
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. 포스터 이미지만 넣기, 클릭시 /movie:id 이동, 일정 시간 지나면 다음 포스터 이미지로
+
+3. 인기 영화 포스터 + 제목 넣기 (기준은 rating으로, detail에 like_count가 있지만 그건 힘들다고 판단됨) + ( ⋮ ), ( ⏷ ) 둘 중하나로 더 디테일하게 만들기
+
+4. 카테고리 + ( ⋮ ), ( ⏷ ) 둘 중하나로 더 디테일하게 만들기
+
+5. 추천 영화 넣기 : 기준은 랜덤으로 포스트 + 제목
+
+## (UI) /movie/:id
+
+1. 맨 윗줄 가운데에 로고 + 이름 넣기
+
+2. 포스터 + 영화 이름, 나온 날짜, 카테고리 + 주연, 러닝타임
+
+3. 줄거리인데 summary 칸이 비어있는거보니 포기해야할듯
+
+## API에서 뽑아야 하는 데이터 정리
+
+main pages
+
+1. 포스터 이미지 : small or large_cover_image
+
+2. 인기 영화 : rating
+
+3. 카테고리 : genres[]
+
+4. 제목 : title
+
+5. id : id
+
+detils (:id를 입력했을때의 값)
+
+1. 개봉일: detail-upload
+
+2. 출연진 : cast[].name
+
+3. runtime : runtime
+
+## 파일 분활 관련
+
+- 일단 미니 프로젝트이기도 하고 어떻게 나눠야 되는지 모르니 하고 싶은대로
+
+- pages와 componunt를 나눈다.
+
+- pages에는 필요한 componunt를 그릴 수 있게 api와 같은 정보를 fetch한다
+
+- pages에 화면 처리를 위해 loading 변수를 정의

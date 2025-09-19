@@ -1,7 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Details from "./pages/detalis";
+
 function App() {
   return (
-    <div>1</div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movie" element={<Details />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
