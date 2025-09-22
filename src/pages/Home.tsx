@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import HomeHeader from "../components/HomeHeader";
 
 function Home() {
   // type
@@ -8,12 +9,12 @@ function Home() {
     rating: number; // 영화 평점
     genres: string[]; // 장르 배열
     small_cover_image: string; // 작은 포스터 이미지 URL
+    medium_cover_image: string;
     large_cover_image: string; // 큰 포스터 이미지 URL
   };
 
   // API 패치 + 데이터 저장
-  const movie_API_URL: string =
-    "https://yts.mx/api/v2/list_movies.json?minimum_rating=7&sort_by=year&limit=50";
+  const movie_API_URL: string = import.meta.env.VITE_MOVIE_API;
   const [movie_datas, setMovie_datas] = useState<Home_movie[]>([]);
 
   const movie_fetch = async () => {
@@ -28,7 +29,8 @@ function Home() {
   }, []);
 
   // 변수 영역
-  console.log(movie_datas);
+  // console.log(movie_datas);
+  console.log(movie_API_URL);
   const [loading, setLoading] = useState<boolean>(true);
 
   return (
@@ -37,11 +39,12 @@ function Home() {
       {loading ? "로딩 중 입니다." : ""}
 
       {/* Welecome page UI */}
+      <HomeHeader data={movie_datas} />
       <ul>
         {movie_datas.map((v: Home_movie, i: number) => {
           return (
             <li key={i}>
-              <img src={v.small_cover_image} />
+              <img src={v.medium_cover_image} />
               <div>id : {v.id}</div>
               <div>title : {v.title}</div>
               <div>rating : {v.rating} </div>
@@ -57,4 +60,21 @@ function Home() {
 
 export default Home;
 
-// Movie API : "https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year"
+/* 
+      <ul>
+        {movie_datas.map((v: Home_movie, i: number) => {
+          return (
+            <li key={i}>
+              <img src={v.medium_cover_image} />
+              <div>id : {v.id}</div>
+              <div>title : {v.title}</div>
+              <div>rating : {v.rating} </div>
+              <div>genres : {v.genres}</div>
+              <hr />
+            </li>
+          );
+        })}
+      </ul>
+*/
+
+// <i class="fa-solid fa-house"></i>

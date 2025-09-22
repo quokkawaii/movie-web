@@ -1,6 +1,7 @@
 :root {
   --bg-color: #1f1f1f;
   --font-color: #ffffff;
+  --gap: 12px;
 }
 
 * {
@@ -9,8 +10,62 @@
   box-sizing: border-box;
   font-size: 1rem;
   color: var(--font-color);
+  line-height: 36px;
 }
 
 html {
   background-color: var(--bg-color);
+}
+
+input {
+  background: none;
+  border: 2px solid transparent;
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+/* Home */
+
+/* Header */
+.homeHeader {
+  width: 768px;
+  margin: 0 auto;
+  margin-top: 12px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.homeTitle {
+  padding: 0 var(--gap);
+  font-size: 20px;
+}
+
+.homeSearch i {
+  margin: 0 var(--gap);
+}
+
+.homeSearch input {
+  padding-left: var(--gap);
+  width: 500px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.homeSearch {
+  margin-right: var(--gap);
+}
+
+.homeSearch input:focus {
+  border: 2px solid var(--font-color);
+  border-radius: 50px;
+}
+
+.quokka {
+  width: 30px;
+  height: 30px;
 }

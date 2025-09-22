@@ -1,8 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Details from "./pages/detalis";
+import Details from "./pages/Detalis";
 
 function App() {
+  const FONTAWESOME_KEY_FETCH = async () => {
+    await fetch(import.meta.env.VITE_FONTAWESOME_KEY);
+  };
+  FONTAWESOME_KEY_FETCH();
+
   return (
     <Router>
       <Routes>

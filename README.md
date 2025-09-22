@@ -67,3 +67,33 @@ detils (:id를 입력했을때의 값)
 - pages에는 필요한 componunt를 그릴 수 있게 api와 같은 정보를 fetch한다
 
 - pages에 화면 처리를 위해 loading 변수를 정의
+
+<hr/>
+
+# 9/20 메모장
+
+- 영화 검색 테스트 제목 : KPop Demon Hunters
+
+- pages > Home (welcome page) 만드는중
+
+- Home > Header 제작 중 배운것들
+
+- form 태그에 button, input 넣으면 button이 submit이라 button이 적용되는건 알았는데 Enter를 눌러도 submit이 작동된다.
+
+- form 태그를 사용해 해당 포스터의 id값을 뽑아내는데 성공했다. search에 text + enter or search click시 해당 영화의 제목이 있다면 Details?id={id}로 이동하는데 성공, useNavigate를 처음 사용해봤는데 유용한것 같다.
+
+- link to ? 이거였나 여튼 이걸로 Quokka Movie 클릭시 메인 페이지로 오게 해야하는거 잊지 말기
+
+- 영화 검색 기능 대소문자 상관없이 + 띄어쓰기 상관없이 검색되게 만들기
+
+- API 키 숨기기 : .env 파일로 숨긴뒤 import.meta.env.VITE\_변수명;
+
+  1. 변수명은 VITE\_변수명 이런식으로 지어야되고
+  2. ;같은거 붙이면 안됨
+  3. 대문자로만 만들기
+  4. 파일은 src안이 아닌 src와 같은 디렉토리에
+  5. .env 파일의 이름은 .env 그대로 지어야함
+
+- 폰트 어썸 사용하는 방법
+
+- https://mydeveldiary.tistory.com/entry/font-awsome 참고 문서

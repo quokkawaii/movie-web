@@ -1,0 +1,58 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import quokka from "../img/쿼카사진2.jfif";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
+type Home_movie = {
+  id: number; // 영화 고유 ID
+  title: string; // 영화 제목
+  rating: number; // 영화 평점
+  genres: string[]; // 장르 배열
+  small_cover_image: string; // 작은 포스터 이미지 URL
+  medium_cover_image: string;
+  large_cover_image: string; // 큰 포스터 이미지 URL
+};
+
+function HomeHeader(prop: { data: Home_movie[] }) {
+  const movie_data = prop.data;
+  const [search, setSearch] = useState<string>("");
+  const navigate = useNavigate();
+
+  const searchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.currentTarget.value);
+  };
+
+  const searchButton = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const input = event.currentTarget.querySelector(
+      "input"
+    ) as HTMLInputElement;
+
+    movie_data.map((v: Home_movie) => {
+      if (search.toUpperCase() === v.title.toUpperCase()) {
+        console.log("Find same title!!!");
+        navigate(`/Detatils?id=${v.id}`);
+      }
+    });
+
+    input.value = "";
+  };
+
+  return (
+    <div>
+      <div className="homeHeader">
+        <div className="homeTitle">Quokka Movie</div>
+        <form className="homeSearch" onSubmit={searchButton}>
+          <button type="submit">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+          <input type="text" onChange={searchInput} />
+        </form>
+        <img className="quokka" src={quokka} />
+      </div>
+    </div>
+  );
+}
+
+export default HomeHeader;
