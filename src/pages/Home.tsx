@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import HomeHeader from "../components/HomeHeader";
+import HomeMain from "../components/HomeMain";
 
 function Home() {
   // type
@@ -12,6 +13,10 @@ function Home() {
     medium_cover_image: string;
     large_cover_image: string; // 큰 포스터 이미지 URL
   };
+
+  // 변수 영역
+  const [loading, setLoading] = useState<boolean>(true);
+  const [count, setCount] = useState<number>(0);
 
   // API 패치 + 데이터 저장
   const movie_API_URL: string = import.meta.env.VITE_MOVIE_API;
@@ -28,18 +33,30 @@ function Home() {
     movie_fetch();
   }, []);
 
-  // 변수 영역
-  // console.log(movie_datas);
-  console.log(movie_API_URL);
-  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    if (movie_datas.length === 0) return;
+
+    console.log(movie_datas[count].id);
+
+    const countId = setInterval(() => {
+      setCount((prev) => (prev + 1) % movie_datas.length);
+    }, 3000);
+
+    return () => clearInterval(countId);
+  }, [movie_datas, count]);
 
   return (
-    <div>
+    <div className="home">
       {/* 로딩 */}
       {loading ? "로딩 중 입니다." : ""}
 
       {/* Welecome page UI */}
       <HomeHeader data={movie_datas} />
+      <HomeMain
+        posterURL={movie_datas[count]?.medium_cover_image}
+        id={movie_datas[count]?.id}
+      />
+
       <ul>
         {movie_datas.map((v: Home_movie, i: number) => {
           return (
@@ -78,3 +95,12 @@ export default Home;
 */
 
 // <i class="fa-solid fa-house"></i>
+
+/* 
+      <HomeMain
+        posterURL={movie_datas[count].medium_cover_image}
+        id={movie_datas[count].id}
+      />
+
+
+*/

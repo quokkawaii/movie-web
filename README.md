@@ -97,3 +97,93 @@ detils (:id를 입력했을때의 값)
 - 폰트 어썸 사용하는 방법
 
 - https://mydeveldiary.tistory.com/entry/font-awsome 참고 문서
+
+# 9/24 메모장
+
+- Home > HomeMain > link to
+
+- link to는 리액트 라우터로 정의한 url로 이동할 수 있는 기능, 즉 리액트 라이브러리를 설치해야 사용 가능
+
+- 동적 라우터 사용하는 방법 정리 + 라우터 사용 방법 정리 + 실수 했던것
+
+- 일단 내가 아는 동적 라우터 방법 두 가지
+
+  1. Link to="라우터에 정의된 url"
+
+  - 닫는 태그를 안썼음. img나 input처럼 안써도 되는줄 알았음
+    => 당연하지만 써야 된다
+
+  - react-router-dom 에서 import 해야된다.
+
+  2. useNavigate()
+
+  - 마찬가지로 react-router-dom에서 import 해야된다.
+
+  - const navi = useNavigate()와 같이 정의해야한다.
+
+  - navi("라우터에 정의된 url")로 화면 전환이 가능하다.
+
+- Router 사용 방법 (내용 미흡으로 추후 수정 예정)
+
+1. Router v6 npm 다운로드
+
+```sh
+  npm install react-router-dom@6
+```
+
+2. import
+
+```typeScript
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+```
+
+3. 예시
+
+```typescript
+<Router>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/movie/:id" element={<Details />} />
+  </Routes>
+</Router>
+```
+
+## tips
+
+- useParams()
+
+1. useParams()으로 :id와 같은 값에 쉽게 접근 가능하다.
+
+2. const { id } = useParams();과 같이 사용 가능하다.
+
+3. 위의 방법을 사용하지 않을시 => const params = useParams(); 이런식으로 쓰고 안에서 값을 꺼내야한다.
+
+## setInterval()에 대해 정리
+
+- 해당 함수는 특정ms 마다 매개변수의 콜백함수를 실행한다.
+
+- 형식
+
+```typescript
+  const interval = setInterval(callback function, Your ms);
+```
+
+- clearInterval(interval), 해당 함수에 setInterval()의 ID를 넣으면 종료된다.
+
+- 호출이 되었으면 반드시 삭제를 해줘야 됨!, 이거 떄문에 좀 쓰기 어려운거 같다.
+
+- 예시 코드
+
+```typescript
+useEffect(() => {
+  if (movie_datas.length === 0) return;
+
+  console.log(movie_datas[count].id);
+
+  const countId = setInterval(() => {
+    setCount((prev) => (prev + 1) % movie_datas.length);
+  }, 3000);
+
+  return () => clearInterval(countId);
+}, [movie_datas, count]);
+```

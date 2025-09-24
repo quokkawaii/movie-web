@@ -1,6 +1,7 @@
 :root {
   --bg-color: #1f1f1f;
   --font-color: #ffffff;
+  --home-search-color: #13171a;
   --gap: 12px;
 }
 
@@ -30,6 +31,12 @@ button {
 
 /* Home */
 
+.home {
+  width: 768px;
+  margin: 0 auto;
+  margin-top: 12px;
+}
+
 /* Header */
 .homeHeader {
   width: 768px;
@@ -38,6 +45,7 @@ button {
   display: flex;
   justify-content: left;
   align-items: center;
+  background-color: var(--home-search-color);
 }
 
 .homeTitle {
@@ -68,4 +76,10 @@ button {
 .quokka {
   width: 30px;
   height: 30px;
+}
+
+/* HomeMain */
+.testIMG {
+  width: 768px;
+  height: 700px;
 }

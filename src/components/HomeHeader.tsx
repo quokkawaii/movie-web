@@ -29,10 +29,9 @@ function HomeHeader(prop: { data: Home_movie[] }) {
       "input"
     ) as HTMLInputElement;
 
-    movie_data.map((v: Home_movie) => {
-      if (search.toUpperCase() === v.title.toUpperCase()) {
-        console.log("Find same title!!!");
-        navigate(`/Detatils?id=${v.id}`);
+    movie_data.forEach((v: Home_movie) => {
+      if (search.trim().toUpperCase() === v.title.trim().toUpperCase()) {
+        navigate(`/movie/${v.id}`);
       }
     });
 
