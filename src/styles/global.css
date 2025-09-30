@@ -1,0 +1,224 @@
+:root {
+  --bg-color: #1f1f1f;
+  --font-color: #ffffff;
+  --home-search-color: #13171a;
+  --content-title-color: #161b1f;
+  --gap: 12px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: var(--font-color);
+  line-height: 36px;
+}
+
+html {
+  background-color: var(--bg-color);
+}
+
+input {
+  background: none;
+  border: 2px solid transparent;
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* Home */
+
+.home {
+  width: 768px;
+  margin: 0 auto;
+  margin-top: 12px;
+  background-color: var(--home-search-color);
+}
+
+/* hidden */
+
+.hidden {
+  display: none;
+}
+
+/* Header */
+.homeHeader {
+  width: 768px;
+  margin: 0 auto;
+  margin-top: 12px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: var(--home-search-color);
+}
+
+.homeTitle {
+  padding: 0 var(--gap);
+  font-size: 20px;
+}
+
+.homeSearch i {
+  margin: 0 var(--gap);
+}
+
+.homeSearch input {
+  padding-left: var(--gap);
+  width: 500px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.homeSearch {
+  margin-right: var(--gap);
+}
+
+.homeSearch input:focus {
+  border: 2px solid var(--font-color);
+  border-radius: 50px;
+}
+
+.quokka {
+  width: 30px;
+  height: 30px;
+}
+
+/* HomeMain */
+.testIMG {
+  width: 768px;
+  height: 700px;
+}
+
+/* HomePopMovie */
+
+.PopMovieTitle {
+  text-align: left;
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding-left: 36px;
+}
+
+.PopMovieUl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.moreBtn {
+  width: 768px;
+  font-size: 20px;
+  background-color: var(--home-search-color);
+  background-color: var(--content-title-color);
+}
+
+/* homeCategory */
+
+.homeCTG_title {
+  text-align: left;
+  font-size: 20px;
+  margin: 10px 0;
+  padding-left: 36px;
+}
+
+.homeCTG_ul {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--content-title-color);
+}
+
+.homeCTG_li button {
+  font-size: 20px;
+  padding: 0 var(--gap);
+  margin: 10px 15px;
+  border-radius: 50px;
+  border: 1px var(--font-color) solid;
+}
+
+.homeCTG_li button:hover {
+  background-color: blueviolet;
+}
+
+/* HomeRecommend */
+
+.homeRc_title {
+  text-align: left;
+  font-size: 20px;
+  margin: 10px 0;
+  padding-left: 36px;
+}
+
+.homeRc_ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/* Details */
+
+.details {
+  width: 768px;
+  margin: 0 auto;
+  margin-top: 12px;
+  background-color: var(--home-search-color);
+}
+
+.details_header {
+  display: flex;
+}
+
+.details_title {
+  margin: 15px;
+  font-size: 40px;
+}
+
+.details_item {
+  font-size: 20px;
+  margin: 0 15px;
+}
+
+.details_item:hover {
+  color: blueviolet;
+}
+
+.details_main {
+  display: flex;
+  justify-content: space-around;
+}
+
+.details_main_content {
+  width: 50%;
+}
+
+.details_ctg {
+  display: flex;
+}
+
+.details_ctg li button {
+  font-size: 20px;
+  padding: 0 var(--gap);
+  margin: 10px 15px;
+  border-radius: 50px;
+  border: 1px var(--font-color) solid;
+}
+
+.details_ctg li button:hover {
+  color: blueviolet;
+}
+
+/* category */
+
+.category_content {
+  display: flex;
+}
+
+.category_content div {
+  margin: 0 var(--gap);
+}

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import HomeHeader from "../components/HomeHeader";
 import HomeMain from "../components/HomeMain";
+import HomePopMovie from "../components/HomePopMovie";
+import HomeCategory from "../components/HomeCategory";
+import HomeRecommend from "../components/HomeRecommend";
 
 function Home() {
   // type
@@ -36,7 +39,7 @@ function Home() {
   useEffect(() => {
     if (movie_datas.length === 0) return;
 
-    console.log(movie_datas[count].id);
+    // console.log(movie_datas[count].id);
 
     const countId = setInterval(() => {
       setCount((prev) => (prev + 1) % movie_datas.length);
@@ -45,6 +48,7 @@ function Home() {
     return () => clearInterval(countId);
   }, [movie_datas, count]);
 
+  console.log(movie_datas);
   return (
     <div className="home">
       {/* 로딩 */}
@@ -56,21 +60,9 @@ function Home() {
         posterURL={movie_datas[count]?.medium_cover_image}
         id={movie_datas[count]?.id}
       />
-
-      <ul>
-        {movie_datas.map((v: Home_movie, i: number) => {
-          return (
-            <li key={i}>
-              <img src={v.medium_cover_image} />
-              <div>id : {v.id}</div>
-              <div>title : {v.title}</div>
-              <div>rating : {v.rating} </div>
-              <div>genres : {v.genres}</div>
-              <hr />
-            </li>
-          );
-        })}
-      </ul>
+      <HomePopMovie data={movie_datas} />
+      <HomeCategory data={movie_datas} />
+      <HomeRecommend data={movie_datas} />
     </div>
   );
 }

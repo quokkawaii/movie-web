@@ -187,3 +187,129 @@ useEffect(() => {
   return () => clearInterval(countId);
 }, [movie_datas, count]);
 ```
+
+# 9/25
+
+- 인기 영화 컨텐츠 만들기, 기준점은 별점순으로 했음.
+
+- 해당 컨텐츠 detail => 이미지 클릭시 /movie/:details_id 로 이동은 동일
+
+- 더보기칸을 만들어 기존 3칸을 보여주고 더보기 누를시 9개 보여주기. 더보기 다시 한번 누르면 줄어 들기까지 => 이걸 생각해 봐야함
+
+- 일단 임시로 반복문의 n값을 useState()로 만들어 더보기 누를시 9, 기존 3으로 유지하여 화면에 보여주기.
+
+- ⏷ 표시도 넣을건데 더보기 누르면 화살표 반대로 바꾸기 ! ⏶
+
+# 10 / 01
+
+- 오늘 영화 웹 만들기 마무리 하기
+
+- 추천 영화 컴포넌트 생성 & details page 만들기
+
+- 카테고리 페이지도 만들어야 될듯?
+
+  1. 카테고리 칸 만들고
+
+  2. 더보기로 해당 칸을 조정
+
+  3. 카테고리의 아이템을 눌렀을 경우
+
+  4. 해당 카테고리 페이지로 이동
+
+  5. 해당 카테고리 페이지에는 거기에 속한 영화 포스터 + 제목 + 카테고리가 나오게 설정
+
+- 오늘 배운거
+
+## json에서 string[]를 가져왔는데 해당 데이터를 변수에 저장하는거
+
+```typescript
+type Genres = {
+  genres: string[];
+};
+
+const category: string[] = [
+  ...new Set(prop.data.flatMap((v) => v.genres)),
+].sort();
+```
+
+- 해당 데이터는 prop에서 넘겨 받은 데이터로 string[]의 타입을 가지고 있었다.
+
+- 그래서 string[] 타입으로 변수를 만들고 해당 값을 받으려고 했다.
+
+- 그 결과 string[] 안에 string[]이 생겨 버려서string[][] 이 되버려 타입 에러가 발생했다.
+
+- flat()를 사용해서 1차원 배열로 리턴을 받으려고 했지만 실패했다.
+
+- flatMap()이란 메서드를 찾아 사용하니 정상적으로 되는것을 알았다.
+
+- 그 다음 new Set으로 중복값을 지우려고 했는데, new Set의 리턴 타입이 일치하지 않아 실패했다.
+
+- 찾아보니 리턴 타입은 {"str1", "str2"} 이런식이였다.
+
+- 스프레드 연산자와 []를 사용하여 값을 정상적으로 초기화하여 변수에 초기화 하였다.
+
+- 각각의 값을 생각해보자 (실수할거 같은 것들)
+
+  1. set(["str1","str2"]) => {"str1", "str2"}
+
+  2. [set(["str1","str2"])] => [{"str1", "str2"}]
+
+  3. ...set(["str1","str2"]) => "str1", "str2" (에러 뜰듯)
+
+## json에서 cast의 타입
+
+```typescript
+  cast = {
+    name : "name1",
+    ...
+  }
+```
+
+- 나중에 다시 정리
+
+## 특정 변수의 삼항연산자 사용으로 jsx 리턴
+
+```typescript
+const [view, setView] = useState<"jsx1" | "jsx2">("jsx1");
+
+return <div>{view === "jsx1" ? "jsx1 view" : "jsx2 view"}</div>;
+```
+
+- event로 view의 값을 처리하면 해당 코드처럼 화면을 동적으로 조작 할 수 있다.
+
+## as HomeMovies[]
+
+```typescript
+const [movie_datas, setMovie_datas] = useState<Home_movie[]>([]);
+
+const movie_fetch = async () => {
+  const response = await fetch(movie_API_URL);
+  const json = await response.json();
+  const movies = json.data.movies as Home_movie[];
+  setMovie_datas(movies.filter((v) => v.genres.includes(category_title!)));
+};
+```
+
+- 해당 코드를 만들때 filter를 사용하여 카테고리에 속한 값만 뽑으려고 만든 코드이다.
+
+- 해당 코드를 만들때 json.data.movies.filter() 를 사용 했다니 매개변수로 들어가는 v값에서 오류가 났던거 같다.
+
+- 컴파일 과정에서 타입 검사할때 감지를 못해서 일어난 에러라고 했던거 같다.
+
+- 해당 에러는 as 문법을 사용해 타입을 명시해주어 해결을 했다.
+
+- 일단 해결은 했지만 정확히 뭔지 몰라서 공부를 해봐야할거 같다.
+
+## 이 값은 절대 undefined가 아니다 => v.genres.includes(category_title!)
+
+- 해당 코드는 useParams()로 가져온 데이터인데 해당 값이 undefined일 수도 있다는 에러 문구가 나왔다.
+
+- 컴파일러에게 null/undefined 검사 생략 지시를 한다
+
+# 궁금한거
+
+- 어떻게 하면 로딩을 없앨수 있을까 => 처음에 api 받은것을 유지 하는 방법,,
+
+- 검색창에 @, : 와 같은 특수 문자들 들어가면 검색이 안되는 버그 발생..
+
+## 추후 readme 파일 수정과 해당 데이터들 + 코드 한번 읽고 다시 정리 할 예정

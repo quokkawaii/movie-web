@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import quokka from "../img/쿼카사진2.jfif";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -41,7 +41,9 @@ function HomeHeader(prop: { data: Home_movie[] }) {
   return (
     <div>
       <div className="homeHeader">
-        <div className="homeTitle">Quokka Movie</div>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div className="homeTitle">Quokka Movie</div>
+        </Link>
         <form className="homeSearch" onSubmit={searchButton}>
           <button type="submit">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
